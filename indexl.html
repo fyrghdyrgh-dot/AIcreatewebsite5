@@ -1,0 +1,998 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>小红书运营 AI 工具导航站｜深色极简</title>
+  <meta name="description" content="小红书运营 AI 工具导航站：选题、标题、笔记改写、图片视频、数据复盘、私域转化。支持分类/搜索/收藏，含广告位与资料包引流 CTA。" />
+  <meta property="og:title" content="小红书运营 AI 工具导航站｜深色极简" />
+  <meta property="og:description" content="选题、标题、笔记、素材、复盘与转化。分类/搜索/收藏，含广告位与资料包引流 CTA。" />
+  <meta property="og:type" content="website" />
+  <style>
+    :root{
+      --bg:#0b0f18;
+      --panel:#0f172a;
+      --panel2:#0b1222;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --line:rgba(148,163,184,.18);
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --accent:#7C3AED;
+      --accent2:#a78bfa;
+      --radius:12px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(124,58,237,.22), transparent 60%),
+        radial-gradient(900px 500px at 100% 0%, rgba(167,139,250,.14), transparent 55%),
+        radial-gradient(900px 500px at 0% 100%, rgba(236,72,153,.08), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      line-height:1.5;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1180px;margin:0 auto;padding:20px}
+    .topbar{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(11,15,24,.92), rgba(11,15,24,.70));
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:14px 20px;max-width:1180px;margin:0 auto}
+    .brand{display:flex;align-items:center;gap:10px;min-width:260px}
+    .logo{
+      width:34px;height:34px;border-radius:10px;
+      background: radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,.35), transparent 60%),
+                  linear-gradient(135deg, rgba(124,58,237,1), rgba(236,72,153,.70));
+      box-shadow: 0 10px 20px rgba(124,58,237,.22);
+    }
+    .brand-title{font-weight:700;letter-spacing:.2px}
+    .brand-sub{font-size:12px;color:var(--muted);margin-top:1px}
+    .brand-text{display:flex;flex-direction:column;line-height:1.1}
+    .search{
+      flex:1;display:flex;align-items:center;gap:10px;max-width:520px;
+      background: rgba(15,23,42,.65);
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:10px 14px;
+    }
+    .search svg{opacity:.75}
+    .search input{
+      flex:1;
+      border:0;outline:0;background:transparent;color:var(--text);
+      font-size:14px;
+    }
+    .search input::placeholder{color:rgba(148,163,184,.75)}
+    .actions{display:flex;align-items:center;gap:10px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.65);
+      color:var(--text);
+      border-radius:999px;
+      padding:10px 14px;
+      font-size:13px;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(167,139,250,.35)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,58,237,1), rgba(99,102,241,.95));
+      border-color: rgba(124,58,237,.55);
+    }
+    .btn.ghost{background:transparent}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:7px 10px;border-radius:999px;
+      background: rgba(15,23,42,.55);
+      border:1px solid var(--line);
+      font-size:12px;color:rgba(226,232,240,.9);
+    }
+    .pill b{color:var(--accent2)}
+    .layout{display:grid;grid-template-columns: 1fr 320px;gap:18px;margin-top:18px}
+    .panel{
+      background: rgba(15,23,42,.60);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .panel.pad{padding:14px}
+    .hero{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:16px 16px 12px}
+    .hero h1{font-size:18px;margin:0}
+    .hero p{margin:6px 0 0;color:var(--muted);font-size:13px;max-width:720px}
+    .stat{display:flex;gap:10px;flex-wrap:wrap}
+    .tabs{
+      display:flex;flex-wrap:wrap;gap:8px;
+      padding:12px 16px 14px;
+      border-top:1px solid var(--line);
+    }
+    .tab{
+      padding:8px 10px;border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(11,18,34,.55);
+      color: rgba(226,232,240,.92);
+      font-size:12px;
+      cursor:pointer;
+      transition: background .12s ease, border-color .12s ease, transform .12s ease;
+    }
+    .tab:hover{transform: translateY(-1px); border-color: rgba(167,139,250,.35)}
+    .tab.active{
+      background: rgba(124,58,237,.18);
+      border-color: rgba(124,58,237,.45);
+      color: #efeaff;
+    }
+    .section{padding:14px 16px 16px;border-top:1px solid var(--line)}
+    .section-title{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .section-title h2{margin:0;font-size:14px}
+    .section-title .muted{font-size:12px}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    .card{
+      border:1px solid var(--line);
+      background: rgba(11,18,34,.62);
+      border-radius: var(--radius);
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-height: 150px;
+      transition: transform .12s ease, border-color .12s ease;
+    }
+    .card:hover{transform: translateY(-2px); border-color: rgba(167,139,250,.35)}
+    .card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+    .card-title{font-weight:700;font-size:13.5px;margin:0}
+    .card-desc{margin:0;color:var(--muted);font-size:12.5px}
+    .tags{display:flex;flex-wrap:wrap;gap:6px}
+    .tag{
+      font-size:11px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.55);
+      color: rgba(226,232,240,.9);
+    }
+    .card-actions{display:flex;align-items:center;gap:8px;margin-top:auto}
+    .mini{
+      padding:8px 10px;border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.55);
+      color: rgba(226,232,240,.95);
+      font-size:12px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+    }
+    .mini.primary{
+      background: rgba(124,58,237,.18);
+      border-color: rgba(124,58,237,.40);
+    }
+    .mini:hover{border-color: rgba(167,139,250,.35)}
+    .star{
+      width:34px;height:34px;border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.55);
+      cursor:pointer;
+      display:inline-flex;align-items:center;justify-content:center;
+    }
+    .star[aria-pressed="true"]{border-color: rgba(124,58,237,.55); background: rgba(124,58,237,.18)}
+    .muted{color:var(--muted)}
+    .rightcol{display:flex;flex-direction:column;gap:12px}
+    .ad{
+      border:1px dashed rgba(148,163,184,.35);
+      border-radius: var(--radius);
+      background: rgba(11,18,34,.35);
+      padding:12px;
+    }
+    .ad-label{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+    .ad-label span{font-size:12px;color:rgba(226,232,240,.85)}
+    .badge{
+      font-size:11px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid rgba(124,58,237,.45);
+      background: rgba(124,58,237,.16);
+      color: #efeaff;
+    }
+    .ad-slot{
+      border-radius: 10px;
+      background: rgba(15,23,42,.55);
+      border:1px solid var(--line);
+      padding:12px;
+      color: rgba(226,232,240,.9);
+      font-size:12.5px;
+      line-height:1.55;
+    }
+    .ad-slot b{color:var(--accent2)}
+    .cta-bar{
+      margin-top:12px;
+      border:1px solid rgba(124,58,237,.32);
+      background: linear-gradient(135deg, rgba(124,58,237,.16), rgba(236,72,153,.08));
+      border-radius: var(--radius);
+      padding:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .foot{
+      margin:18px 0 30px;
+      padding:14px 16px;
+      border-top:1px solid var(--line);
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    }
+    .foot a{color:rgba(226,232,240,.92)}
+    .foot a:hover{color:#fff}
+    .divider{width:1px;height:12px;background: var(--line)}
+    .toast{
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 18px;
+      background: rgba(2,6,23,.85);
+      border: 1px solid rgba(148,163,184,.25);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 12.5px;
+      color: rgba(226,232,240,.95);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 60;
+      max-width: calc(100vw - 24px);
+      text-align:center;
+    }
+    .toast.show{opacity:1; transform: translateX(-50%) translateY(-6px)}
+    .float-cta{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 55;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-end;
+    }
+    .fab{
+      border-radius: 999px;
+      padding: 12px 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,1), rgba(99,102,241,.95));
+      color: white;
+      border: 1px solid rgba(124,58,237,.55);
+      box-shadow: 0 18px 40px rgba(124,58,237,.22);
+      cursor:pointer;
+      font-size: 13px;
+      display:inline-flex;align-items:center;gap:8px;
+      user-select:none;
+    }
+    .fab.secondary{
+      background: rgba(15,23,42,.80);
+      border-color: rgba(148,163,184,.25);
+      box-shadow: var(--shadow);
+    }
+    .modal{
+      position: fixed; inset: 0;
+      background: rgba(2,6,23,.65);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index: 80;
+      padding: 18px;
+    }
+    .modal.show{display:flex}
+    .dialog{
+      width: min(860px, 100%);
+      border-radius: 16px;
+      border: 1px solid rgba(148,163,184,.25);
+      background: rgba(15,23,42,.92);
+      box-shadow: 0 40px 90px rgba(0,0,0,.55);
+      overflow:hidden;
+    }
+    .dialog-head{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding: 14px 14px 12px;
+      border-bottom:1px solid rgba(148,163,184,.18);
+    }
+    .dialog-title{font-weight:700}
+    .dialog-body{
+      display:grid;grid-template-columns: 1.2fr .8fr;gap:14px;
+      padding: 14px;
+    }
+    .qr{
+      border-radius: 14px;
+      border:1px solid rgba(148,163,184,.22);
+      background: rgba(11,18,34,.60);
+      padding: 12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      min-height: 260px;
+    }
+    .qr img{width:180px;height:180px;border-radius:12px;background:#fff}
+    .close{
+      width: 38px;height: 38px;border-radius: 999px;
+      border:1px solid rgba(148,163,184,.22);
+      background: rgba(11,18,34,.60);
+      color: rgba(226,232,240,.95);
+      cursor:pointer;
+    }
+    @media (max-width: 980px){
+      .layout{grid-template-columns: 1fr}
+      .rightcol{order:-1}
+      .brand{min-width:0}
+      .search{max-width:none}
+    }
+    @media (max-width: 860px){
+      .grid{grid-template-columns: repeat(2, minmax(0, 1fr))}
+      .dialog-body{grid-template-columns: 1fr}
+      .qr{min-height:220px}
+    }
+    @media (max-width: 520px){
+      .topbar-inner{flex-wrap:wrap}
+      .brand{width:100%}
+      .actions{width:100%;justify-content:flex-end}
+      .grid{grid-template-columns: 1fr}
+      .float-cta{right: 12px; bottom: 12px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="brand-text">
+          <div class="brand-title">小红书运营 AI 工具导航</div>
+          <div class="brand-sub">选题 · 标题 · 笔记 · 素材 · 复盘 · 转化</div>
+        </div>
+      </div>
+
+      <div class="search" role="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2" opacity=".9"/>
+          <path d="M16.2 16.2 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".9"/>
+        </svg>
+        <input id="q" type="text" autocomplete="off" placeholder="搜索：工具名称 / 简介 / 标签…" />
+        <span class="pill" title="当前筛选"><b id="activeCat">全部</b><span id="count">0</span></span>
+      </div>
+
+      <div class="actions">
+        <button class="btn ghost" id="showFavs" data-event="nav_show_favs" type="button">只看收藏</button>
+        <button class="btn primary" id="submitTool" data-event="nav_submit_tool" type="button">提交工具</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="ad panel" style="padding:12px;margin-top:16px">
+      <div class="ad-label">
+        <span>顶部横幅</span>
+        <span class="badge">赞助</span>
+      </div>
+      <div class="ad-slot">
+        <div><b>广告位（可替换）</b></div>
+        <div class="muted">适合放：小红书训练营/投放工具/素材库。建议尺寸：728×90 或自适应横幅。</div>
+        <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="mini primary" href="#" data-event="ad_top_click">查看合作</a>
+          <a class="mini" href="#" data-event="ad_top_contact">投放咨询</a>
+        </div>
+      </div>
+    </div>
+
+    <section class="layout">
+      <section class="panel" aria-label="工具列表">
+        <div class="hero">
+          <div>
+            <h1>小红书运营常用 AI 工具合集</h1>
+            <p>覆盖选题与标题、爆款笔记结构、改写润色、图片视频素材、数据复盘与私域转化。支持分类筛选、实时搜索与收藏。</p>
+          </div>
+          <div class="stat" aria-label="统计">
+            <span class="pill">分类 <b id="catCount">0</b></span>
+            <span class="pill">工具 <b id="toolCount">0</b></span>
+            <span class="pill">收藏 <b id="favCount">0</b></span>
+          </div>
+        </div>
+
+        <div class="tabs" id="tabs" role="tablist" aria-label="分类筛选"></div>
+
+        <div class="section" id="hot">
+          <div class="section-title">
+            <h2>热门工具（Top 10）</h2>
+            <div class="muted">高频：选题/标题/笔记/素材</div>
+          </div>
+          <div class="grid" id="hotGrid"></div>
+        </div>
+
+        <div class="section" id="categorySection">
+          <div class="section-title">
+            <h2>分类工具</h2>
+            <div class="muted">每个分类末尾可领取资料包</div>
+          </div>
+          <div id="catBlocks"></div>
+        </div>
+
+        <div class="foot">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span class="muted">© <span id="year"></span> 小红书运营 AI 工具导航</span>
+            <span class="divider" aria-hidden="true"></span>
+            <a href="#" id="openDisclaimer" data-event="open_disclaimer">免责声明</a>
+            <span class="divider" aria-hidden="true"></span>
+            <a href="#" id="openPrivacy" data-event="open_privacy">隐私政策</a>
+          </div>
+          <div class="muted">外链仅供参考，请自行甄别风险。</div>
+        </div>
+      </section>
+
+      <aside class="rightcol" aria-label="侧栏">
+        <section class="panel pad">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <div>
+              <div style="font-weight:700">领取小红书资料包</div>
+              <div class="muted" style="font-size:12px;margin-top:4px">爆款结构 · 标题库 · 选题表</div>
+            </div>
+            <span class="badge">转化</span>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+            <button class="mini primary" id="ctaJoin" data-event="cta_join" type="button">加入社群</button>
+            <button class="mini" id="ctaGift" data-event="cta_gift" type="button">领取资料</button>
+          </div>
+          <div class="muted" style="font-size:12px;margin-top:10px">
+            建议：弹窗放二维码 + 资料目录 + 获取步骤。
+          </div>
+        </section>
+
+        <section class="ad panel">
+          <div class="ad-label">
+            <span>侧栏广告</span>
+            <span class="badge">赞助</span>
+          </div>
+          <div class="ad-slot">
+            <div><b>广告位（可替换）</b></div>
+            <div class="muted">建议尺寸：300×250。可放训练营/选题库/投放工具。</div>
+            <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
+              <a class="mini primary" href="#" data-event="ad_side_click">立即了解</a>
+              <a class="mini" href="#" data-event="ad_side_contact">合作投放</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel pad">
+          <div style="font-weight:700">增长提醒</div>
+          <ul style="margin:10px 0 0 18px;padding:0;color:rgba(226,232,240,.92);font-size:12.5px;line-height:1.7">
+            <li>分类命名尽量贴近搜索词：选题/标题/笔记结构。</li>
+            <li>把“领取资料包”做成强转化节点（不强制）。</li>
+            <li>外链可替换成跳转页，方便做数据统计。</li>
+            <li>广告位保持“赞助”标识，提升信任。</li>
+          </ul>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <div class="float-cta">
+    <button class="fab" id="fabMain" data-event="fab_open" type="button">加入社群 / 领资料</button>
+    <button class="fab secondary" id="fabTop" data-event="fab_back_top" type="button">回到顶部</button>
+  </div>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="弹窗">
+    <div class="dialog">
+      <div class="dialog-head">
+        <div>
+          <div class="dialog-title" id="modalTitle">领取资料</div>
+          <div class="muted" style="font-size:12px;margin-top:4px">替换二维码与文案即可</div>
+        </div>
+        <button class="close" id="closeModal" data-event="modal_close" type="button" aria-label="关闭">✕</button>
+      </div>
+      <div class="dialog-body">
+        <div>
+          <p style="font-weight:700;margin:0 0 8px">你将获得</p>
+          <ul style="margin:0 0 12px 18px;padding:0;color:rgba(226,232,240,.92);font-size:12.8px;line-height:1.7">
+            <li>小红书选题表（可直接复用）</li>
+            <li>爆款笔记结构模板与标题库</li>
+            <li>笔记改写与评论区引导话术</li>
+          </ul>
+          <p class="muted" style="font-size:12.5px;margin:0 0 12px">提示：可加入社群规则/资料目录，提升转化质量。</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="mini primary" id="markDone" data-event="modal_done" type="button">我已获取</button>
+            <button class="mini" id="copyText" data-event="modal_copy" type="button">复制引导话术</button>
+          </div>
+        </div>
+        <div class="qr">
+          <img alt="二维码占位图" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><rect width='100%25' height='100%25' fill='%23ffffff'/><rect x='16' y='16' width='188' height='188' fill='none' stroke='%23111' stroke-width='3'/><g fill='%23111' opacity='.92'><rect x='34' y='34' width='50' height='50'/><rect x='136' y='34' width='50' height='50'/><rect x='34' y='136' width='50' height='50'/><rect x='102' y='102' width='18' height='18'/><rect x='128' y='102' width='18' height='18'/><rect x='102' y='128' width='18' height='18'/><rect x='128' y='128' width='18' height='18'/><rect x='154' y='120' width='10' height='10'/><rect x='120' y='154' width='10' height='10'/><rect x='154' y='154' width='10' height='10'/></g><text x='110' y='214' text-anchor='middle' font-family='Arial' font-size='12' fill='%23555'>QR Placeholder</text></svg>" />
+          <div class="muted" style="font-size:12px;text-align:center">
+            扫码加入/领取<br/>（替换成你的真实二维码）
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const site = {
+      domain: "小红书运营",
+      packName: "小红书运营资料包"
+    };
+
+    const hotTools = [
+      { name:"ChatGPT", desc:"选题、标题、笔记结构与改写润色。", url:"https://chat.openai.com", tags:["选题","改写","标题"] },
+      { name:"Claude", desc:"长文拆解、竞品笔记归纳与总结。", url:"https://claude.ai", tags:["拆解","总结","归纳"] },
+      { name:"Perplexity", desc:"找资料与引用，做选题调研更快。", url:"https://www.perplexity.ai", tags:["检索","调研","引用"] },
+      { name:"Canva", desc:"封面与模板化排版，适合快速出图。", url:"https://www.canva.com", tags:["封面","模板","排版"] },
+      { name:"CapCut", desc:"短视频剪辑与模板，适合口播与混剪。", url:"https://www.capcut.com", tags:["剪辑","模板","短视频"] },
+      { name:"Runway", desc:"视频特效与生成，提升素材差异化。", url:"https://runwayml.com", tags:["视频","特效","生成"] },
+      { name:"Remove.bg", desc:"一键抠图，做封面更省时。", url:"https://www.remove.bg", tags:["抠图","封面","效率"] },
+      { name:"Notion AI", desc:"内容库与 SOP 整理，便于团队协作。", url:"https://www.notion.so/product/ai", tags:["SOP","内容库","协作"] },
+      { name:"Hotjar", desc:"落地页热力图，优化转化路径。", url:"https://www.hotjar.com", tags:["转化","热力图","优化"] },
+      { name:"GA4", desc:"站点数据监测与转化跟踪。", url:"https://analytics.google.com", tags:["统计","转化","监测"] }
+    ];
+
+    const categories = [
+      {
+        cat: "选题/调研",
+        desc: "找趋势、找人群、找差异化角度。",
+        tools: [
+          { name:"Perplexity", desc:"快速找资料，生成调研摘要。", url:"https://www.perplexity.ai", tags:["检索","调研","引用"] },
+          { name:"Google Trends", desc:"趋势验证与季节性判断。", url:"https://trends.google.com", tags:["趋势","验证","需求"] },
+          { name:"Exploding Topics", desc:"捕捉增长主题与新热点。", url:"https://explodingtopics.com", tags:["热点","增长","选题"] },
+          { name:"AnswerThePublic", desc:"用户提问洞察，做内容切入点。", url:"https://answerthepublic.com", tags:["洞察","问题","切入"] },
+          { name:"Notion AI", desc:"选题库与标签体系整理。", url:"https://www.notion.so/product/ai", tags:["内容库","标签","SOP"] },
+          { name:"Google Sheets", desc:"选题表格与进度管理。", url:"https://docs.google.com/spreadsheets", tags:["表格","进度","管理"] }
+        ]
+      },
+      {
+        cat: "标题/开头",
+        desc: "提升点击：标题公式与开头钩子。",
+        tools: [
+          { name:"ChatGPT", desc:"标题多版本与开头钩子生成。", url:"https://chat.openai.com", tags:["标题","钩子","多版本"] },
+          { name:"Claude", desc:"把爆款标题拆成可复用公式。", url:"https://claude.ai", tags:["拆解","公式","归纳"] },
+          { name:"Copy.ai", desc:"营销标题与卖点表达。", url:"https://www.copy.ai", tags:["营销","标题","模板"] },
+          { name:"Jasper", desc:"高转化文案与 CTA 生成。", url:"https://www.jasper.ai", tags:["文案","CTA","转化"] },
+          { name:"Hemingway", desc:"把句子写短、写清楚。", url:"https://hemingwayapp.com", tags:["可读性","简化","表达"] },
+          { name:"Grammarly", desc:"英文内容润色（出海号）。", url:"https://www.grammarly.com", tags:["英文","润色","纠错"] }
+        ]
+      },
+      {
+        cat: "笔记结构/改写",
+        desc: "爆款结构模板化，批量产出更稳定。",
+        tools: [
+          { name:"ChatGPT", desc:"笔记结构、改写润色与降重。", url:"https://chat.openai.com", tags:["改写","结构","润色"] },
+          { name:"Claude", desc:"长文编辑与逻辑调整更强。", url:"https://claude.ai", tags:["长文","逻辑","编辑"] },
+          { name:"QuillBot", desc:"改写与多版本输出。", url:"https://quillbot.com", tags:["改写","多版本","写作"] },
+          { name:"Notion AI", desc:"素材库与 SOP 工作流。", url:"https://www.notion.so/product/ai", tags:["内容库","SOP","协作"] },
+          { name:"Tally", desc:"用户需求收集，反向做内容。", url:"https://tally.so", tags:["表单","需求","反馈"] },
+          { name:"Google Docs", desc:"协作写作与版本管理。", url:"https://docs.google.com/document", tags:["协作","写作","版本"] }
+        ]
+      },
+      {
+        cat: "图片/封面",
+        desc: "封面统一风格，提高识别度与点击。",
+        tools: [
+          { name:"Canva", desc:"封面模板与快速排版。", url:"https://www.canva.com", tags:["封面","模板","排版"] },
+          { name:"Remove.bg", desc:"一键抠图，封面更干净。", url:"https://www.remove.bg", tags:["抠图","封面","效率"] },
+          { name:"Figma", desc:"封面组件化与批量迭代。", url:"https://www.figma.com", tags:["组件","批量","协作"] },
+          { name:"Midjourney", desc:"风格化配图与场景图生成。", url:"https://www.midjourney.com", tags:["风格","配图","生成"] },
+          { name:"Leonardo", desc:"可控出图，适合素材生成。", url:"https://leonardo.ai", tags:["素材","可控","生成"] },
+          { name:"Photopea", desc:"在线修图与 PSD 支持。", url:"https://www.photopea.com", tags:["修图","在线","PSD"] }
+        ]
+      },
+      {
+        cat: "视频/剪辑",
+        desc: "口播、混剪与字幕，提升完播与互动。",
+        tools: [
+          { name:"CapCut", desc:"模板剪辑与字幕，快速出片。", url:"https://www.capcut.com", tags:["剪辑","字幕","模板"] },
+          { name:"Runway", desc:"视频特效与生成，增强质感。", url:"https://runwayml.com", tags:["特效","生成","视频"] },
+          { name:"Descript", desc:"音视频文本化编辑，更易改稿。", url:"https://www.descript.com", tags:["字幕","口播","编辑"] },
+          { name:"ElevenLabs", desc:"高拟真配音，适合旁白。", url:"https://elevenlabs.io", tags:["配音","TTS","旁白"] },
+          { name:"Adobe Podcast", desc:"语音增强与降噪。", url:"https://podcast.adobe.com", tags:["降噪","增强","录音"] },
+          { name:"AIVA", desc:"配乐生成，避免素材库重复。", url:"https://www.aiva.ai", tags:["配乐","生成","视频"] }
+        ]
+      },
+      {
+        cat: "数据/复盘",
+        desc: "用数据驱动选题与转化路径优化。",
+        tools: [
+          { name:"GA4", desc:"站点统计与事件转化。", url:"https://analytics.google.com", tags:["统计","事件","转化"] },
+          { name:"Looker Studio", desc:"报表可视化与复盘看板。", url:"https://lookerstudio.google.com", tags:["报表","可视化","复盘"] },
+          { name:"Hotjar", desc:"热力图与录屏，优化落地页。", url:"https://www.hotjar.com", tags:["热力图","洞察","优化"] },
+          { name:"Airtable", desc:"内容库与发布流程管理。", url:"https://airtable.com", tags:["内容库","流程","协作"] },
+          { name:"Zapier", desc:"自动化：表单→表格→通知。", url:"https://zapier.com", tags:["自动化","无代码","集成"] },
+          { name:"Metabase", desc:"BI 看板与查询分析。", url:"https://www.metabase.com", tags:["BI","看板","查询"] }
+        ]
+      }
+    ];
+
+    const state = {
+      activeCat: "全部",
+      q: "",
+      favOnly: false,
+      favs: new Set()
+    };
+
+    const LS_KEY = "aiNav:xhs:favs";
+
+    const els = {
+      q: document.getElementById("q"),
+      tabs: document.getElementById("tabs"),
+      activeCat: document.getElementById("activeCat"),
+      count: document.getElementById("count"),
+      catCount: document.getElementById("catCount"),
+      toolCount: document.getElementById("toolCount"),
+      favCount: document.getElementById("favCount"),
+      showFavs: document.getElementById("showFavs"),
+      submitTool: document.getElementById("submitTool"),
+      hotGrid: document.getElementById("hotGrid"),
+      catBlocks: document.getElementById("catBlocks"),
+      year: document.getElementById("year"),
+      toast: document.getElementById("toast"),
+      modal: document.getElementById("modal"),
+      modalTitle: document.getElementById("modalTitle"),
+      closeModal: document.getElementById("closeModal"),
+      fabMain: document.getElementById("fabMain"),
+      fabTop: document.getElementById("fabTop"),
+      ctaJoin: document.getElementById("ctaJoin"),
+      ctaGift: document.getElementById("ctaGift"),
+      markDone: document.getElementById("markDone"),
+      copyText: document.getElementById("copyText"),
+      openDisclaimer: document.getElementById("openDisclaimer"),
+      openPrivacy: document.getElementById("openPrivacy")
+    };
+
+    function normalize(s){return (s || "").toLowerCase().trim();}
+    function escapeHtml(s){
+      return String(s)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function toast(msg){
+      els.toast.textContent = msg;
+      els.toast.classList.add("show");
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => els.toast.classList.remove("show"), 1600);
+    }
+
+    function track(el){
+      const ev = el?.dataset?.event;
+      if(!ev) return;
+      window.__events = window.__events || [];
+      window.__events.push({ event: ev, ts: Date.now() });
+    }
+
+    function loadFavs(){
+      try{
+        const raw = localStorage.getItem(LS_KEY);
+        if(!raw) return;
+        const arr = JSON.parse(raw);
+        if(Array.isArray(arr)) state.favs = new Set(arr);
+      }catch(_){}
+    }
+
+    function saveFavs(){
+      localStorage.setItem(LS_KEY, JSON.stringify(Array.from(state.favs)));
+      updateCounts();
+    }
+
+    function allTools(){
+      const list = [];
+      hotTools.forEach(t => list.push({ ...t, cat: "热门" }));
+      categories.forEach(c => c.tools.forEach(t => list.push({ ...t, cat: c.cat })));
+      return list;
+    }
+
+    function categoriesForTabs(){
+      return ["全部", "热门", ...categories.map(c => c.cat)];
+    }
+
+    function matchesQuery(item, q){
+      if(!q) return true;
+      const hay = [item.name, item.desc, item.cat, ...(item.tags || [])].join(" ").toLowerCase();
+      return hay.includes(q);
+    }
+
+    function shouldShow(item){
+      if(state.activeCat !== "全部" && item.cat !== state.activeCat) return false;
+      if(state.favOnly && !state.favs.has(item.name)) return false;
+      if(!matchesQuery(item, state.q)) return false;
+      return true;
+    }
+
+    function updateCounts(filteredCount){
+      els.catCount.textContent = String(categories.length);
+      els.toolCount.textContent = String(allTools().length - hotTools.length);
+      els.favCount.textContent = String(state.favs.size);
+      if(typeof filteredCount === "number") els.count.textContent = String(filteredCount);
+    }
+
+    function renderTabs(){
+      const tabs = categoriesForTabs();
+      els.tabs.innerHTML = tabs.map(cat => {
+        const active = cat === state.activeCat ? "active" : "";
+        return `<button class="tab ${active}" type="button" role="tab" aria-selected="${active ? "true" : "false"}" data-cat="${escapeHtml(cat)}" data-event="tab_${escapeHtml(cat)}">${escapeHtml(cat)}</button>`;
+      }).join("");
+    }
+
+    function renderToolCard(item){
+      const fav = state.favs.has(item.name);
+      return `
+        <article class="card" data-name="${escapeHtml(item.name)}">
+          <div class="card-head">
+            <div>
+              <h3 class="card-title">${escapeHtml(item.name)}</h3>
+              <p class="card-desc">${escapeHtml(item.desc)}</p>
+            </div>
+            <button class="star" type="button" aria-label="收藏" aria-pressed="${fav ? "true" : "false"}" data-fav="${escapeHtml(item.name)}" data-event="fav_toggle">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 17.3 6.2 20.6l1.1-6.6L2.6 9.7l6.6-1 2.8-6 2.8 6 6.6 1-4.7 4.3 1.1 6.6L12 17.3Z" stroke="currentColor" stroke-width="2" opacity="${fav ? "1" : ".7"}" fill="${fav ? "rgba(124,58,237,.35)" : "transparent"}"/>
+              </svg>
+            </button>
+          </div>
+          <div class="tags">
+            <span class="tag">${escapeHtml(item.cat)}</span>
+            ${(item.tags || []).slice(0,3).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join("")}
+          </div>
+          <div class="card-actions">
+            <a class="mini primary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer" data-event="tool_open">访问</a>
+            <button class="mini" type="button" data-event="tool_copy" data-copy="${escapeHtml(item.name)}｜${escapeHtml(item.url)}">复制链接</button>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderInlineAd(slot){
+      return `
+        <div class="ad panel" style="padding:12px;margin:12px 0" role="region" aria-label="信息流广告">
+          <div class="ad-label">
+            <span>信息流广告 ${slot}</span>
+            <span class="badge">赞助</span>
+          </div>
+          <div class="ad-slot">
+            <div><b>广告位（可替换）</b></div>
+            <div class="muted">适合放：训练营/素材库/选题库/投放工具。插入在分类之间更自然。</div>
+            <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
+              <a class="mini primary" href="#" data-event="ad_feed_${slot}_click">查看详情</a>
+              <a class="mini" href="#" data-event="ad_feed_${slot}_contact">合作投放</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderHot(){
+      const list = hotTools
+        .map(t => ({ ...t, cat: "热门" }))
+        .filter(shouldShow);
+      els.hotGrid.innerHTML = list.map(renderToolCard).join("") || `
+        <div class="card" style="grid-column:1 / -1">
+          <div class="card-title">热门工具暂无匹配</div>
+          <p class="card-desc">尝试切换分类为“全部/热门”，或减少搜索关键词。</p>
+        </div>
+      `;
+      return list.length;
+    }
+
+    function renderCategories(){
+      const blocks = [];
+      categories.forEach((c, idx) => {
+        const id = "cat_" + idx;
+        if(state.activeCat !== "全部" && state.activeCat !== c.cat) return;
+        const list = (c.tools || []).map(t => ({ ...t, cat: c.cat })).filter(shouldShow);
+        blocks.push(`
+          <section class="section" id="${id}">
+            <div class="section-title">
+              <h2>${escapeHtml(c.cat)}</h2>
+              <div class="muted">${escapeHtml(c.desc || "")}</div>
+            </div>
+            <div class="grid">
+              ${list.map(renderToolCard).join("") || `
+                <div class="card" style="grid-column:1 / -1">
+                  <div class="card-title">该分类暂无匹配</div>
+                  <p class="card-desc">尝试减少搜索词，或关闭“只看收藏”。</p>
+                </div>
+              `}
+            </div>
+            <div class="cta-bar">
+              <div>
+                <div style="font-weight:700">领取 ${escapeHtml(site.domain)}「${escapeHtml(c.cat)}」资料包</div>
+                <div class="muted" style="font-size:12px;margin-top:4px">模板/清单/话术可直接复用</div>
+              </div>
+              <button class="mini primary" type="button" data-event="cta_pack_${escapeHtml(c.cat)}" data-pack="${escapeHtml(c.cat)}">领取资料包</button>
+            </div>
+          </section>
+        `);
+        if(idx === 1) blocks.push(renderInlineAd("A"));
+        if(idx === 3) blocks.push(renderInlineAd("B"));
+      });
+      els.catBlocks.innerHTML = blocks.join("");
+      return blocks.length;
+    }
+
+    function bindDynamic(){
+      document.querySelectorAll("[data-fav]").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          track(e.currentTarget);
+          const name = e.currentTarget.getAttribute("data-fav");
+          if(!name) return;
+          if(state.favs.has(name)) state.favs.delete(name);
+          else state.favs.add(name);
+          saveFavs();
+          renderAll();
+          toast(state.favs.has(name) ? "已收藏" : "已取消收藏");
+        });
+      });
+
+      document.querySelectorAll("[data-copy]").forEach(btn => {
+        btn.addEventListener("click", async (e) => {
+          track(e.currentTarget);
+          const text = e.currentTarget.getAttribute("data-copy") || "";
+          try{
+            await navigator.clipboard.writeText(text);
+            toast("已复制到剪贴板");
+          }catch(_){
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            ta.style.left = "-9999px";
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            ta.remove();
+            toast("已复制到剪贴板");
+          }
+        });
+      });
+
+      document.querySelectorAll('a[data-event="tool_open"]').forEach(a => {
+        a.addEventListener("click", (e) => track(e.currentTarget));
+      });
+
+      document.querySelectorAll('[data-event^="ad_"]').forEach(a => {
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          track(e.currentTarget);
+          toast("示例广告位：请替换链接");
+        });
+      });
+
+      document.querySelectorAll("[data-pack]").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          track(e.currentTarget);
+          const pack = e.currentTarget.getAttribute("data-pack") || site.packName;
+          openModal(`领取资料包：${site.domain}｜${pack}`);
+        });
+      });
+    }
+
+    function openModal(title){
+      els.modalTitle.textContent = title;
+      els.modal.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal(){
+      els.modal.classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    function renderAll(){
+      els.activeCat.textContent = state.activeCat;
+      renderHot();
+      renderCategories();
+      const totalShown = allTools().filter(shouldShow).length;
+      updateCounts(totalShown);
+      bindDynamic();
+      if(state.activeCat === "热门"){
+        document.getElementById("hot")?.scrollIntoView({ behavior:"smooth", block:"start" });
+      }
+      if(state.activeCat !== "全部" && state.activeCat !== "热门"){
+        const idx = categories.findIndex(c => c.cat === state.activeCat);
+        const id = "cat_" + idx;
+        document.getElementById(id)?.scrollIntoView({ behavior:"smooth", block:"start" });
+      }
+    }
+
+    function init(){
+      loadFavs();
+      els.year.textContent = String(new Date().getFullYear());
+      renderTabs();
+      renderAll();
+
+      els.q.addEventListener("input", () => {
+        state.q = normalize(els.q.value);
+        renderAll();
+      });
+
+      els.tabs.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-cat]");
+        if(!btn) return;
+        track(btn);
+        const cat = btn.getAttribute("data-cat");
+        if(!cat) return;
+        state.activeCat = cat;
+        renderTabs();
+        renderAll();
+      });
+
+      els.showFavs.addEventListener("click", (e) => {
+        track(e.currentTarget);
+        state.favOnly = !state.favOnly;
+        els.showFavs.textContent = state.favOnly ? "显示全部" : "只看收藏";
+        renderAll();
+        toast(state.favOnly ? "仅显示收藏" : "显示全部");
+      });
+
+      function onCtaClick(btn, title){
+        btn.addEventListener("click", (e) => {
+          track(e.currentTarget);
+          openModal(title);
+        });
+      }
+      onCtaClick(els.fabMain, "加入社群 / 领取资料");
+      onCtaClick(els.ctaJoin, "加入小红书运营社群");
+      onCtaClick(els.ctaGift, "领取小红书资料包");
+
+      els.fabTop.addEventListener("click", (e) => {
+        track(e.currentTarget);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      els.closeModal.addEventListener("click", (e) => { track(e.currentTarget); closeModal(); });
+      els.modal.addEventListener("click", (e) => { if(e.target === els.modal) closeModal(); });
+      window.addEventListener("keydown", (e) => { if(e.key === "Escape" && els.modal.classList.contains("show")) closeModal(); });
+
+      els.markDone.addEventListener("click", (e) => {
+        track(e.currentTarget);
+        closeModal();
+        toast("已记录");
+      });
+
+      els.copyText.addEventListener("click", async (e) => {
+        track(e.currentTarget);
+        const text = "你好，我想领取小红书运营资料包（选题表 + 标题库 + 爆款结构模板 + 引导话术）。麻烦发我获取方式。";
+        try{
+          await navigator.clipboard.writeText(text);
+          toast("引导话术已复制");
+        }catch(_){
+          toast("复制失败，请手动复制");
+        }
+      });
+
+      els.submitTool.addEventListener("click", (e) => {
+        track(e.currentTarget);
+        openModal("提交工具 / 商务合作");
+      });
+
+      els.openDisclaimer.addEventListener("click", (e) => {
+        e.preventDefault();
+        track(e.currentTarget);
+        openModal("免责声明：本站内容仅供参考，外链服务与风险由第三方承担。");
+      });
+
+      els.openPrivacy.addEventListener("click", (e) => {
+        e.preventDefault();
+        track(e.currentTarget);
+        openModal("隐私政策：收藏数据仅保存在你的浏览器本地，不会上传。");
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>
