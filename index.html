@@ -910,9 +910,21 @@
 
     function toolIconHtml(tool){
       if(tool?.icon){
-        return `<img src="${escapeHtml(tool.icon)}" alt="${escapeHtml(tool.name)}" loading="lazy" />`;
+        return `<img src="${escapeHtml(tool.icon)}" alt="${escapeHtml(tool.name)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-icon-name="${escapeHtml(tool.name)}" />`;
       }
       return toolIconSvg(tool?.name || "");
+    }
+
+    function attachIconFallback(root){
+      if(!root) return;
+      root.querySelectorAll('img[data-icon-name]').forEach(img => {
+        img.addEventListener("error", () => {
+          const name = img.getAttribute("data-icon-name") || "";
+          const wrap = img.parentElement;
+          if(!wrap) return;
+          wrap.innerHTML = toolIconSvg(name);
+        }, { once: true });
+      });
     }
 
     function renderRecommend(mode){
@@ -947,6 +959,7 @@
           </span>
         </a>
       `).join("");
+      attachIconFallback(els.recommendGrid);
 
       els.recommendGrid.querySelectorAll("a").forEach(a => {
         a.addEventListener("click", (e) => {
